@@ -1,0 +1,24 @@
+services:
+    easy_admin_access_bundle.access_checker:
+        class: EasyAdminAccessBundle\Service\AccessChecker
+        arguments:
+            - "@security.token_storage"
+            - "@security.role_hierarchy"
+
+    easy_admin_access_bundle.access_subscriber:
+        class: EasyAdminAccessBundle\EventSubscriber\EasyAdminSubscriber
+        arguments:
+            - "@easy_admin_access_bundle.access_checker"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    easyadmin.twig.extension:
+        class: EasyAdminAccessBundle\Twig\EasyAdminAccessTwigExtension
+        public: false
+        arguments:
+            - "@easyadmin.config.manager"
+            - "@property_accessor"
+            - "@service_container"
+            - "%kernel.debug%"
+        tags:
+            - { name: twig.extension }

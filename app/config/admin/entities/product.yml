@@ -16,6 +16,7 @@ easy_admin:
             class: AppBundle\Entity\Product
             label: 'Products'
             list:
+                # roles: [ROLE_PRODUCT_LIST, ROLE_PRODUCT_SHOW]
                 fields:
                     - id
                     - enabled
@@ -26,6 +27,7 @@ easy_admin:
                     - { property: 'createdAt', format: 'j / M / Y' }
                     - tags
             show:
+                roles: [ROLE_PRODUCT_SHOW]
                 fields:
                     - id
                     - { property: 'name', css_class: 'large' }
@@ -39,6 +41,7 @@ easy_admin:
                     - categories
                     - tags
             form:
+                roles: [ROLE_PRODUCT_EDIT]
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information', icon: 'pencil' }
                     - { property: 'name', css_class: 'large' }
